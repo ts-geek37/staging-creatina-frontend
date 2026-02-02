@@ -30,7 +30,12 @@ const DilemmaPresentation: React.FC<Props> = ({
       <div className="max-w-2xl w-full space-y-12">
         <h1 className={`${serif.className} text-4xl`}>{dilemma.title}</h1>
 
-        <p className="text-lg text-foreground/70">{dilemma.summary}</p>
+        <p
+          className="text-lg text-foreground/70"
+          dangerouslySetInnerHTML={{
+            __html: dilemma.summary?.replace(/\n/g, "<br>"),
+          }}
+        />
 
         <Button onClick={onStart} disabled={starting}>
           {starting ? "Starting…" : "Start"}
