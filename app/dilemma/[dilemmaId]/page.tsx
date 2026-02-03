@@ -12,7 +12,7 @@ const DilemmaPage = () => {
   const router = useRouter();
 
   const { dilemma, loading, error } = useDilemma(dilemmaId);
-  const { startSession } = useSessionContext();
+  const { startSession, loading: sessionLoading } = useSessionContext();
   const [starting, setStarting] = useState(false);
 
   const onStart = async () => {
@@ -31,6 +31,10 @@ const DilemmaPage = () => {
     return (
       <LoadingState title="Preparing dilemma" subtitle="Setting the context" />
     );
+  }
+
+  if (sessionLoading) {
+    return <LoadingState title="Starting session" subtitle="Please wait" />;
   }
 
   if (error || !dilemma) {
